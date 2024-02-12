@@ -37,11 +37,11 @@ play_game_WSLS <- function(n_trials){
 
 play_game_RL <- function(n_trials) {
     # init arrays
-    value_hider <- array(NA, n_trials)
+    values_hider <- array(NA, n_trials)
     choices_hider <- array(NA, n_trials)
     feedback_hider <- array(NA, n_trials)
 
-    value_picker <- array(NA, n_trials)
+    values_picker <- array(NA, n_trials)
     choices_picker <- array(NA, n_trials)
     feedback_picker <- array(NA, n_trials)
 
@@ -65,8 +65,8 @@ play_game_RL <- function(n_trials) {
         choices_picker[i] <- picker[[1]]
 
         # get value 
-        value_hider[i] <- hider[[2]]
-        value_picker[i] <- picker[[2]]
+        values_hider[i] <- hider[[2]]
+        values_picker[i] <- picker[[2]]
 
         feedback_hider[i] <- ifelse(choices_hider[i] != choices_picker[i], 1, 0)
         feedback_picker[i] <- ifelse(choices_hider[i] == choices_picker[i], 1, 0)
@@ -77,4 +77,3 @@ play_game_RL <- function(n_trials) {
 
     return(list(hider_df, picker_df))
 }
-
