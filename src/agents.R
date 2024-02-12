@@ -1,4 +1,5 @@
-## script with code for agents ##
+# script with code for agents
+
 pacman::p_load(tidyverse)
 
 # WIN SHIFT LOSE STAY AGENT
