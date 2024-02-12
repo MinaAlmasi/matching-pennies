@@ -29,8 +29,8 @@ REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha
     new_value = previous_value + alpha * prediction_error
 
     # make choice based on value
-    #choice = rbinom(1, 1, new_value)
-    choice = ifelse(new_value > 0.5, 1, 0)
+    choice = rbinom(1, 1, new_value)
+    #choice = ifelse(new_value > 0.5, 1, 0) # for testing only
 
     # return choice and value
     return(list(choice, new_value))
