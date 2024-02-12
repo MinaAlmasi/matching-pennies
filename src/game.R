@@ -27,9 +27,23 @@ play_game_WSLS <- function(n_trials){
 
     }
 
-    # bind the informaion to dataframes
-    hider_df <- data.frame(choices_hider, feedback_hider)
-    picker_df <- data.frame(choices_picker, feedback_picker)
+    # bind the information to dataframes
+    hider_df <- data.frame("choices" = choices_hider, "feedback" = feedback_hider)
+    picker_df <- data.frame("choices" = choices_picker, "feedback" = feedback_picker)
+
+    # add role to hider_df and picker_df 
+    hider_df["role"] <- "hider"
+    picker_df["role"] <- "picker"
+
+    # add agent self type 
+    hider_df["agent_self_type"] <- "WSLS"
+    picker_df["agent_self_type"] <- "WSLS"
+    hider_df["agent_other_type"] <- "WSLS"
+    picker_df["agent_other_type"] <- "WSLS"
+
+    # add trial columns
+    hider_df["trial"] <- 1:n_trials
+    picker_df["trial"] <- 1:n_trials
 
     return(list(hider_df, picker_df))
 
@@ -75,8 +89,22 @@ play_game_RL <- function(n_trials) {
         feedback_picker[i] <- ifelse(choices_hider[i] == choices_picker[i], 1, 0)
     }
     # bind the informaion to dataframes
-    hider_df <- data.frame(choices_hider, feedback_hider, values_hider)
-    picker_df <- data.frame(choices_picker, feedback_picker, values_picker)
+    hider_df <- data.frame("choices" = choices_hider, "feedback" = feedback_hider, "values" = values_hider)
+    picker_df <- data.frame("choices" = choices_picker, "feedback" = feedback_picker, "values" = values_picker)
+
+    # add role to hider_df and picker_df 
+    hider_df["role"] <- "hider"
+    picker_df["role"] <- "picker"
+
+    # add agent self type 
+    hider_df["agent_self_type"] <- "RL"
+    picker_df["agent_self_type"] <- "RL"
+    hider_df["agent_other_type"] <- "RL"
+    picker_df["agent_other_type"] <- "RL"
+
+    # add trial columns
+    hider_df["trial"] <- 1:n_trials
+    picker_df["trial"] <- 1:n_trials
 
     return(list(hider_df, picker_df))
 }
@@ -117,8 +145,22 @@ play_game_RL_WSLS <- function(n_trials) {
     }
 
     # bind to dfs
-    hider_df <- data.frame(choices_hider, feedback_hider, values_hider)
-    picker_df <- data.frame(choices_picker, feedback_picker)
+    hider_df <- data.frame("choices" = choices_hider, "feedback" = feedback_hider, "values" = values_hider)
+    picker_df <- data.frame("choices" = choices_picker, "feedback" = feedback_picker)
+
+    # add role to hider_df and picker_df 
+    hider_df["role"] <- "hider"
+    picker_df["role"] <- "picker"
+
+    # add agent self type 
+    hider_df["agent_self_type"] <- "RL"
+    picker_df["agent_self_type"] <- "WSLS"
+    hider_df["agent_other_type"] <- "WSLS"
+    picker_df["agent_other_type"] <- "RL"
+
+    # add trial columns
+    hider_df["trial"] <- 1:n_trials
+    picker_df["trial"] <- 1:n_trials
 
     return(list(hider_df, picker_df))
 
@@ -164,6 +206,20 @@ play_game_WSLS_RL <- function(n_trials) {
     # bind to dfs
     hider_df <- data.frame(choices_hider, feedback_hider)
     picker_df <- data.frame(choices_picker, feedback_picker, values_picker)
+
+    # add role to hider_df and picker_df 
+    hider_df["role"] <- "hider"
+    picker_df["role"] <- "picker"
+
+    # add agent self type 
+    hider_df["agent_self_type"] <- "WSLS"
+    picker_df["agent_self_type"] <- "RL"
+    hider_df["agent_other_type"] <- "RL"
+    picker_df["agent_other_type"] <- "WSLS"
+
+    # add trial columns
+    hider_df["trial"] <- 1:n_trials
+    picker_df["trial"] <- 1:n_trials
 
     return(list(hider_df, picker_df))
 }
