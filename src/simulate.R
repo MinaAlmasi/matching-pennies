@@ -1,3 +1,5 @@
+# script to simulate games defined in game.R with agents defined in agents.R
+
 pacman::p_load(tidyverse, here)
 source(here::here("src/agents.R"))
 source(here::here("src/game.R"))
@@ -74,6 +76,10 @@ simulate_games <- function(n_trials, n_games){
 }
 
 games_df <- simulate_games(120, 100)
-print(games_df %>% filter(combination == "WSLS_WSLS") %>% head())
-print(games_df %>% filter(combination == "RL_RL") %>% head())
-print(games_df %>% filter(combination == "RL_WSLS") %>% head())
+#print(games_df %>% filter(combination == "WSLS_WSLS") %>% head())
+#print(games_df %>% filter(combination == "RL_RL") %>% head())
+#print(games_df %>% filter(combination == "RL_WSLS") %>% head())
+
+# save to csv
+savefile <- file.path("out", "data.csv")
+write_csv(games_df, savefile)
