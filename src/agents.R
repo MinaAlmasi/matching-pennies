@@ -27,13 +27,10 @@ REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha
 
     # update value
     new_value = previous_value + alpha * prediction_error
-    
-    # put value through a sigmoid using the formula
-    choice_rate = 1/(1+exp(-new_value))
 
     # make choice based on value
-    #choice = rbinom(1, 1, choice_rate)
-    choice = ifelse(choice_rate > 0.5, 1, 0)
+    #choice = rbinom(1, 1, new_value)
+    choice = ifelse(new_value > 0.5, 1, 0)
 
     # return choice and value
     return(list(choice, new_value))
