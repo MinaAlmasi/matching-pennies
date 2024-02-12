@@ -1,3 +1,5 @@
+# script defining the games that can be played with the agents defined in agents.R
+
 pacman::p_load(tidyverse, here)
 source(here::here("src/agents.R"))
 
