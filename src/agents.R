@@ -5,7 +5,7 @@ pacman::p_load(tidyverse)
 WSHIFTLSTAY_Agent <- function(previous_choice, feedback){
     # if we are in the first round (no previous choice and feedback), make a random selection
     if (is.null(feedback) & is.null(previous_choice)){
-        choice = rbinorm(1, 1, 0.5)
+        choice = rbinom(1, 1, 0.5)
     }
     # if we had a win last round, we do the opposite this round!
     if (feedback == 1){
@@ -43,7 +43,7 @@ REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha
     choice_rate = 1/(1+exp(-new_value))
 
     # make choice based on value
-    choice = rbinorm(1, 1, choice_rate)
+    choice = rbinom(1, 1, choice_rate)
     #choice = ifelse(choice_rate > 0.5, 1, 0)
 
     # return choice and value
