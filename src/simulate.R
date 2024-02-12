@@ -167,11 +167,3 @@ play_game_WSLS_RL <- function(n_trials) {
 
     return(list(hider_df, picker_df))
 }
-
-dfs <- play_game_RL_WSLS(20)
-
-hider <- dfs[[1]]
-picker <- dfs[[2]]
-
-print(hider)
-print(picker)
