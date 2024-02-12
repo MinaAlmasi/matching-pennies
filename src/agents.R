@@ -36,5 +36,5 @@ REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha
     choice = ifelse(choice_rate > 0.5, 1, 0)
 
     # return choice and value
-    return(list(choice, new_value, choice_rate))
+    return(list(choice, new_value))
 }
