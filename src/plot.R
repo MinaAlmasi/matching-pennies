@@ -13,11 +13,15 @@ average = RL_WSLS_df %>%
     group_by(trial, agent_self_type) %>%
     summarise(average_performance = mean(feedback))
 
+# convert trial to integer (for adjusting x-axis)
+average$trial <- as.integer(average$trial)
+
 # create plot
 plot <- ggplot(average, aes(x = trial, y = average_performance, color = agent_self_type, group = agent_self_type)) +
     geom_line() +
     geom_point() +
     labs(x = "Trial", y = "Average Performance", color = "Agent") +
+    scale_x_continuous(breaks = seq(0, 120, 10)) +
     theme_bw()
 
 # save the plot
