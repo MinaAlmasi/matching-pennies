@@ -23,13 +23,13 @@ WSHIFTLSTAY_Agent <- function(previous_choice, feedback){
 # REINFORCEMENT LEARNING AGENT
 REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha){
     # if we are in the first round, define expected value 
-    if (is.na(previous_value)){
-        # set the 0.5 as that is a 50/50
+    if (is.null(previous_value)){
+        # set the zero as that is a 50/50 when put through sigmoid
         new_value = 0.5
     }
 
     else {
-        # compute previous correct choice from feedback and previous choice (if feedback is 1, previous correct choice is previous choice, otherwise it is the opposite)
+        # compute previous correct choice from feeddback and previous choice (if feedback is 1, previous correct choice is previous choice, otherwise it is the opposite)
         previous_correct_choice = ifelse(feedback==1, previous_choice, 1-previous_choice)
 
         # calculate prediction error
@@ -38,16 +38,18 @@ REINFORCEMENT_Agent <- function(previous_choice, previous_value, feedback, alpha
         # update value
         new_value = previous_value + alpha * prediction_error
     }
-  
+
+    # put value through a sigmoid using the formula
+    choice_rate = 1/(1+exp(-new_value))
+
     # make choice based on value
-    #choice = rbinorm(1, 1, new_value)
-    choice = ifelse(new_value > 0.5, 1, 0)
+    choice = rbinorm(1, 1, choice_rate)
+    #choice = ifelse(choice_rate > 0.5, 1, 0)
 
     # return choice and value
-    return(list(choice, new_value))
+    return(list(choice, new_value, choice_rate))
 }
 
 # testing the reinforcement agent
-agent = REINFORCEMENT_Agent(previous_choice = 0, previous_value = 0.5, feedback = 0, alpha = 0.5)
-print(agent[1])
+agent = REINFORCEMENT_Agent(previous_choice = 1, previous_value = 0.9, feedback = 1, alpha = 0.5)
 print(agent[2])
