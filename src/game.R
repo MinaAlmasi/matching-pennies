@@ -105,6 +105,10 @@ play_game_RL <- function(n_trials, learning_rate=0.2) {
     hider_df["trial"] <- 1:n_trials
     picker_df["trial"] <- 1:n_trials
 
+    # add learning rate
+    hider_df["learning_rate"] <- learning_rate
+    picker_df["learning_rate"] <- learning_rate
+
     return(list(hider_df, picker_df))
 }
 
@@ -157,6 +161,10 @@ play_game_RL_WSLS <- function(n_trials, learning_rate=0.2) {
     # add trial columns
     hider_df["trial"] <- 1:n_trials
     picker_df["trial"] <- 1:n_trials
+
+    # add learning rate
+    hider_df["learning_rate"] <- learning_rate
+    picker_df["learning_rate"] <- learning_rate
 
     return(list(hider_df, picker_df))
 
@@ -213,6 +221,10 @@ play_game_WSLS_RL <- function(n_trials, learning_rate=0.2) {
     # add trial columns
     hider_df["trial"] <- 1:n_trials
     picker_df["trial"] <- 1:n_trials
+
+    # add learning rate
+    hider_df["learning_rate"] <- learning_rate
+    picker_df["learning_rate"] <- learning_rate
 
     return(list(hider_df, picker_df))
 }

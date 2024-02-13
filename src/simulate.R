@@ -34,26 +34,30 @@ simulate_games <- function(n_trials, n_games){
         
         # add to main games df
         games_df <- bind_rows(games_df, combined_df)
-    }
+    }    
+    # define the learning rates we want to test
+    learning_rates <- c(0.05, 0.2, 0.5)
 
-    print("Playing RL-RL")
-    for (i in 1:n_games){
-        dfs <- play_game_RL(n_trials, learning_rate=0.2)
+    for (learning_rate in learning_rates){
+        print(paste("Playing RL-RL with learning rate", learning_rate))
+        for (i in 1:n_games){
+            dfs <- play_game_RL(n_trials, learning_rate=learning_rate)
 
-        hider_df <- dfs[[1]]
-        picker_df <- dfs[[2]]
+            hider_df <- dfs[[1]]
+            picker_df <- dfs[[2]]
 
-        # combine hider_df and picker_df
-        combined_df <- bind_rows(hider_df, picker_df)
+            # combine hider_df and picker_df
+            combined_df <- bind_rows(hider_df, picker_df)
 
-        # add game_id
-        combined_df["game_id"] <- i
-        
-        # add combination
-        combined_df["combination"] <- "RL_RL"
-        
-        # add to main games df
-        games_df <- bind_rows(games_df, combined_df)
+            # add game_id
+            combined_df["game_id"] <- i
+            
+            # add combination
+            combined_df["combination"] <- "RL_RL"
+            
+            # add to main games df
+            games_df <- bind_rows(games_df, combined_df)
+        }
     }
     
     print("Playing RL-WSLS")
