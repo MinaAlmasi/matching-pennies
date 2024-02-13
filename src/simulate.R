@@ -7,6 +7,9 @@ source(here::here("src/game.R"))
 n_trials <- 120 
 n_games <- 50 
 
+# set seed for reproducibility
+set.seed(2502)
+
 # trial number, choice, feedback, value, agent_self_type, agent_other_type, role, combination, game_id
 simulate_games <- function(n_trials, n_games){
     games_df <- data.frame()
@@ -53,7 +56,7 @@ simulate_games <- function(n_trials, n_games){
     }
     print("Playing RL-WSLS")
     for (i in 1:n_games){
-        dfs <- play_game_RL_WSLS(n_trials)
+        dfs <- play_game_RL_WSLS(n_trials, learning_rate=0.2)
 
         hider_df <- dfs[[1]]
         picker_df <- dfs[[2]]

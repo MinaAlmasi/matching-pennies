@@ -51,7 +51,7 @@ play_game_WSLS <- function(n_trials){
 
 }
 # play single RL game for a specific number of trials
-play_game_RL <- function(n_trials) {
+play_game_RL <- function(n_trials, learning_rate=0.2) {
     # init arrays
     values_hider <- array(NA, n_trials)
     choices_hider <- array(NA, n_trials)
@@ -72,9 +72,6 @@ play_game_RL <- function(n_trials) {
     feedback_picker[1] <- ifelse(choices_hider[1] == choices_picker[1], 1, 0)
 
     for (i in 2:n_trials){
-        # define common learning rate
-        learning_rate = 0.2
-
         # make agents
         hider <- REINFORCEMENT_Agent(previous_choice = choices_hider[i-1], previous_value = values_hider[i-1], feedback = feedback_hider[i-1], alpha = learning_rate)
         picker <- REINFORCEMENT_Agent(previous_choice = choices_picker[i-1], previous_value = values_picker[i-1], feedback = feedback_picker[i-1], alpha = learning_rate)
@@ -111,7 +108,7 @@ play_game_RL <- function(n_trials) {
     return(list(hider_df, picker_df))
 }
 
-play_game_RL_WSLS <- function(n_trials) {
+play_game_RL_WSLS <- function(n_trials, learning_rate=0.2) {
     # init arrays
     values_hider <- array(NA, n_trials)
     choices_hider <- array(NA, n_trials)
@@ -130,9 +127,6 @@ play_game_RL_WSLS <- function(n_trials) {
     feedback_picker[1] <- ifelse(choices_hider[1] == choices_picker[1], 1, 0)
 
     for (i in 2:n_trials){
-        # define common learning rate
-        learning_rate = 0.2
-
         # make agents (extract choices directly with the WSHIFTLSTAY agent)
         hider <- REINFORCEMENT_Agent(previous_choice = choices_hider[i-1], previous_value = values_hider[i-1], feedback = feedback_hider[i-1], alpha = learning_rate)
         choices_picker[i] <- WSHIFTLSTAY_Agent(previous_choice = choices_picker[i-1], feedback = feedback_picker[i-1])
@@ -168,7 +162,7 @@ play_game_RL_WSLS <- function(n_trials) {
 
 }
 
-play_game_WSLS_RL <- function(n_trials) {
+play_game_WSLS_RL <- function(n_trials, learning_rate=0.2) {
     # WSLS (hider)
     choices_hider <- array(NA, n_trials)
     feedback_hider <- array(NA, n_trials)
@@ -188,9 +182,6 @@ play_game_WSLS_RL <- function(n_trials) {
     feedback_picker[1] <- ifelse(choices_hider[1] == choices_picker[1], 1, 0)
 
     for (i in 2:n_trials){
-        # define common learning rate
-        learning_rate = 0.2
-
         # make agents (extract choices directly with the WSHIFTLSTAY agent)
         choices_hider[i] <- WSHIFTLSTAY_Agent(previous_choice = choices_picker[i-1], feedback = feedback_picker[i-1])
         picker <- REINFORCEMENT_Agent(previous_choice = choices_hider[i-1], previous_value = values_picker[i-1], feedback = feedback_hider[i-1], alpha = learning_rate)
