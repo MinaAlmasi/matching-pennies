@@ -67,7 +67,7 @@ plot_WSLS_WSLS <- ggplot(average_list$WSLS_WSLS, aes(x = trial, y = average_perf
     geom_line() +
     geom_point() +
     labs(x = "Trial", y = "Proportion of wins at trial", color = "Agent") +
-    scale_color_manual(labels = c("WSLS (hider)", "WSLS (picker)"), 
+    scale_color_manual(labels = c("WSLS* (hider)", "WSLS* (picker)"), 
                        values = c("hider" = "#40A2E3", "picker" = "#EB4747")) +  
     scale_x_continuous(breaks = seq(0, 120, 10)) +
     ylim(0,1) +
