@@ -12,6 +12,10 @@ set.seed(2502)
 
 # trial number, choice, feedback, value, agent_self_type, agent_other_type, role, combination, game_id
 simulate_games <- function(n_trials, n_games){
+    # define LR for RL agents
+    learning_rate = 0.2
+
+    # init games df
     games_df <- data.frame()
 
     # play WSLS-WSLS
@@ -37,7 +41,7 @@ simulate_games <- function(n_trials, n_games){
 
     print("Playing RL-RL")
     for (i in 1:n_games){
-        dfs <- play_game_RL(n_trials)
+        dfs <- play_game_RL(n_trials, learning_rate=learning_rate)
 
         hider_df <- dfs[[1]]
         picker_df <- dfs[[2]]
@@ -56,7 +60,7 @@ simulate_games <- function(n_trials, n_games){
     }
     print("Playing RL-WSLS")
     for (i in 1:n_games){
-        dfs <- play_game_RL_WSLS(n_trials, learning_rate=0.2)
+        dfs <- play_game_RL_WSLS(n_trials, learning_rate=learning_rate)
 
         hider_df <- dfs[[1]]
         picker_df <- dfs[[2]]
@@ -84,5 +88,5 @@ games_df <- simulate_games(120, 100)
 #print(games_df %>% filter(combination == "RL_WSLS") %>% head())
 
 # save to csv
-savefile <- file.path("out", "data.csv")
+savefile <- file.path("out", "data_lr_02.csv")
 write_csv(games_df, savefile)
