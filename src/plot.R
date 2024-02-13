@@ -25,4 +25,4 @@ plot <- ggplot(average, aes(x = trial, y = average_performance, color = agent_se
     theme_bw()
 
 # save the plot
-ggsave(file.path("out", "plot_test.jpeg"), plot, width = 8, height = 6)
+ggsave(file.path("out", "plot_RL_WSLS.jpeg"), plot, width = 8, height = 6)
